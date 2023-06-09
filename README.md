@@ -8,38 +8,25 @@
 ## Инициализация
 1. Клонирование репозитория.
    ```sh
-   git clone git@github.com:AlPetrovv/test_dadata.git
+   git clone git@github.com:AlPetrovv/test_kwork.git
    ```
-   
-2. Активация виртуального окружения.
-   ```sh
-   cd test_dadata
-   python3.10 -m venv venv
-   source venv/bin/activate если linux .\venv\Scripts\activate если Windows
-    ```
-    
-3. Скачивание зависимоcтей.
+2. Создание .env (вам необходимо добавить эти переменные в .env)
     ```sh
-   (venv) $ pip install -r requirements.txt
+    SECRET_KEY=<your_secret_key> 
+    POSTGRES_DB=<your_bd_name> 
+    PGUSER=postgres # can be another
+    POSTGRES_INITDB_ARGS='-A md5'
+    POSTGRES_PASSWORD=<your_password>
+    POSTGRES_HOST=db
+    POSTGRES_PORT=5432
    ```
-   
-## Запуск
- ```sh
-   python3 app/manage.py
-  ```
+3. Запуск приложения
+   ```sh
+   docker-compose -f docker-compose.yaml up --build 
+    ```
+
 ## Интерфейс
 
-* Для начал вам нужно ввести токен для сервиса dadata
-* Выбрать язык (ru/en)
-* Следовать инструкциям для выполнения определенных действий 
+* Для начал вам нужно зайти на http://127.0.0.1:3000/
+* Выбирайте действие, которое вам хотите 
 
-## Ошибки
-
-* Если у что-то не получилось или вы получили ошибку, нужно заново запустить скрипт(см. Запуск)
-
-## Подсказки
-* Если у ва произошла ошибка при соединении на сервер 403 Error, попробуйте обновить свой token(API-ключ) в личном кабинете dadata
-
-## Видеоподсказка
-  
-<a href="https://asciinema.org/a/568193" target="_blank"><img src="https://asciinema.org/a/568193.svg" /></a>
