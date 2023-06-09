@@ -1,0 +1,79 @@
+version: '3.8'
+# without volumes
+services:
+
+  db:
+    container_name: db
+    image: postgres:13.0-alpine
+    restart: always
+    ports:
+        - "5433:5432"
+    expose:
+      - "5433"
+    env_file:
+      - ./.env
+
+  backend:
+    restart: always
+    container_name: backend
+    build:
+      context: ./app/
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    command: > # can be gunicorn
+      bash -c "python3 manage.py collectstatic --noinput && python3 manage.py migrate && gunicorn -b 0.0.0.0:8000 app.wsgi:application "
+
+  frontend:
+    restart: always
+    container_name: frontend
+    build: front/
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+
+  worker:
+    container_name: celery_worker
+    build:
+      context: ./app/
+    entrypoint: celery
+    command: [ "-A","app" ,"worker", "-l", "INFO" ]
+    depends_on:
+      - redis
+      - backend
+
+    env_file:
+      - ./.env
+    restart: always
+    links:
+      - redis
+
+  redis:
+    domainname: redis
+    image: redis
+    hostname: redis
+    restart: always
+    healthcheck:
+      test: redis-cli ping
+      interval: 3s
+      timeout: 5s
+      retries: 5
+    command:
+      [ "redis-server" ]
+    expose:
+      - '6380'
+    ports:
+      - '6380:6379'
+
+
+
+
+
