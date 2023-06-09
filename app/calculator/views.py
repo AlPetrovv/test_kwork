@@ -21,7 +21,7 @@ def get_sum(request, name: str):
     serializer.is_valid(raise_exception=True)
     problem = serializer.save()
     _get_sum.apply_async(args=(res, problem.id))
-    return Response(data={"access": problem.id}, status=status.HTTP_200_OK)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 @api_view(["GET"])

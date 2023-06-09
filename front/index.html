@@ -56,7 +56,7 @@ let response = await fetch(`${url}do-sum/${fileName}/`)
 if (response.status === 200) {
 data = await response.json()
 e = document.querySelector("#container")
-e.textContent = `ID: ${data.access}`
+e.textContent = `ID: ${data.id}`
 } else {
 e = document.querySelector("#container")
 e.textContent = `Ошибка ${response.status}`

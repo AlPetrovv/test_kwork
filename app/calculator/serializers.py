@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from calculator.models import Problem
+from .models import Problem
 
 
 class ProblemSerializer(ModelSerializer):
