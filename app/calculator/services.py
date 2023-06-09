@@ -5,6 +5,9 @@ from rest_framework.response import Response
 
 
 def check_csv(name: str) -> Response | str:
+    """
+    check csv opening  and values of columns is numbers
+    """
     try:
         path = f"calculator/data/{name}"
         if not os.path.isfile(path):

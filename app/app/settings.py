@@ -24,7 +24,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
+### FOR TEST ###
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_TRUSTED_ORIGINS = [
@@ -32,15 +32,12 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5500",
     'http://localhost:8000',
     'http://127.0.0.1:8000',
-
 ]
 
 ALLOWED_HOSTS = [
     '0.0.0.0',
     "localhost",
     "127.0.0.1",
-
-
 ]
 
 CORS_ALLOW_METHODS = [
@@ -58,8 +55,6 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 )
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -163,6 +158,7 @@ MEDIA_URL = os.environ.get('MEDIA_URL', '')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# celery
 CELERY_BROKER_URL = 'redis://redis:6379'  # change to os.getenv()
 CELERY_RESULT_BACKEND = 'redis://redis:6379'  # change to os.getenv()
 CELERY_ACCEPT_CONTENT = ['application/json']

@@ -10,6 +10,10 @@ from .tasks import _get_sum
 
 @api_view(["GET"])  # can be POST(without a difference)
 def get_sum(request, name: str):
+    """
+    firstly the file is checked after that  the
+    Problem is created then calc sum of every second column
+    """
     res: str | Response = check_csv(name)
     if isinstance(res, Response):
         return res

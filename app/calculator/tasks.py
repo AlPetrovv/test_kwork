@@ -9,12 +9,13 @@ logger = get_task_logger(__name__)
 
 @app.task
 def _get_sum(path, problem_id: int) -> None:
-    logger.info(problem_id)
-    logger.info("path" + path)
+    """
+    function that calculates the sum in every second column
+    """
     problem = get_object_or_404(Problem, pk=problem_id)
     res = None
     l = []
-    for i in range(10_000_000):
+    for i in range(10_000_000):  # in needs to see several active task
         l.append(i)
     try:
         pd: DataFrame = read_csv(path, sep=';')
