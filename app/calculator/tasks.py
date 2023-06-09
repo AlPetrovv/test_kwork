@@ -13,6 +13,9 @@ def _get_sum(path, problem_id: int) -> None:
     logger.info("path" + path)
     problem = get_object_or_404(Problem, pk=problem_id)
     res = None
+    l = []
+    for i in range(10_000_000):
+        l.append(i)
     try:
         pd: DataFrame = read_csv(path, sep=';')
         pd[pd.columns].astype(float)

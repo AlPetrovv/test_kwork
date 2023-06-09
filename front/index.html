@@ -27,7 +27,6 @@
       <div id="resultGetActiveTask"></div>
       <div id="resultDoSum"></div>
       <div class="col-auto">
-      <button onclick="getActiveTask()" id="submitActiveTask" type="button" class="btn btn-primary w-50">Получить</button>
     </div>
     </div>
   </form>
@@ -72,23 +71,29 @@ e.textContent = `Ошибка ${error.message}`
 
 
 async function getActiveTask() {
-try {
+  try {
 let response = await fetch(`${url}amount-problems/`)
 if (response.status === 200) {
-data = await response.json()
-e = document.querySelector("#resultGetActiveTask")
-e.textContent = `Активных задач: ${data.result}`
+  data = await response.json()
+  e = document.querySelector("#resultGetActiveTask")
+  e.textContent = `Активных задач: ${data.result}`
 } else {
-e = document.querySelector("#resultGetActiveTask")
-e.textContent = `Ошибка ${response.status}`
+  e = document.querySelector("#resultGetActiveTask")
+  e.textContent = `Ошибка ${response.status}`
 
 }
 }
-catch (error) {
-e = document.querySelector("#resultGetActiveTask")
-e.textContent = `Ошибка ${error.message}`
+ catch (error) {
+  e = document.querySelector("#resultGetActiveTask")
+  e.textContent = `Ошибка ${error.message}`
 
 }}
+
+setInterval(function(){
+  getActiveTask()
+
+}, 1000);
+
 
 async function getTaskResult() {
 try {
